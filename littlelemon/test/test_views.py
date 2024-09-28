@@ -1,11 +1,17 @@
 from django.test import TestCase
 from restaurant.views import Menu
+from restaurant.serializers import MenuSerializer
+from rest_framework.test import APIClient
 
-""" class MenuViewTest(TestCase):   
+class MenuViewTest(TestCase):   
     def setUp(self):
-        self.item_one = Menu.objects.create(title="IceCream", price=2, inventory=10)
-        self.item_two = Menu.objects.create(title="Orange Juice", price=1, inventory=11)
-         
+        self.client = APIClient()
+        self.menu_item1 = Menu.objects.create(title="Burger", price=10.99, inventory=50)
+        self.menu_item2 = Menu.objects.create(title="Pizza", price=12.99, inventory=40)
+
     def test_getall(self):
-        items = Menu.objects.all()
-        self.assertEqual(2, items.count) """
+        response = self.client.get('/restaurant/menu/')
+        menu_items = Menu.objects.all()
+        serializer = MenuSerializer(menu_items, many=True)
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, 200)

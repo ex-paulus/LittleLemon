@@ -5,7 +5,7 @@
 /restaurant/booking/tables/ --POST creates new booking
 
 
-!!! removed password and emails as GitHub Guradian requested, so one can just create a new user for testing 
+!!! removed password and emails as GitHub Guardian requested, so one can just create a new user for testing 
 Users:
 Username: admin
 Username: adrian
